@@ -1,5 +1,21 @@
 // initialize the app
-var myapp = angular.module('myapp', []);
+var myapp = angular.module('myapp', ['ngSanitize','ngRoute']);
+
+// Routes and Views
+myapp.config(function($routeProvider){
+  $routeProvider.when("/", {
+    templateUrl : "templates/index.html",
+    controller : "indexController"
+  })
+  .when("/pagina-ejemplo", {
+    templateUrl : "templates/pagina-ejemplo.html",
+    controller : "paginaController"
+  })
+  //este es digamos, al igual que en un switch el default, en caso que
+  //no hayamos concretado que nos redirija a la página principal
+  .otherwise({ reditrectTo : "/" });
+});
+
 
 // set the configuration
 myapp.run(['$rootScope', function($rootScope){
@@ -9,8 +25,15 @@ myapp.run(['$rootScope', function($rootScope){
   $rootScope.api = AppAPI.url;
 }]);
 
-// add a controller
-myapp.controller('mycontroller', ['$scope', '$http', function($scope, $http) {
+myapp.controller('tabsController', function ($scope){
+  $scope.tab = 1;
+  $scope.selectTab = function (tab) {
+    $scope.tab = tab;
+  };
+})
+
+// add a controller indexController
+myapp.controller('indexController', ['$scope', '$http', function($scope, $http) {
   // load posts from the WordPress API
   $http({
     method: 'GET',
@@ -24,4 +47,52 @@ myapp.controller('mycontroller', ['$scope', '$http', function($scope, $http) {
   }).
   error(function(data, status, headers, config) {
   });
-}]);
+  $scope.comments = [
+    {
+      body: "Putas",
+      email: 'jhonn@outlook.com',
+      date: 20150210
+    }
+  ];
+
+  $scope.show = false;
+  $scope.toggle = function () {
+    $scope.show = !$scope.show;
+  };
+
+}])
+
+// add a controller paginaController
+myapp.controller("paginaController", ['$scope', '$http', function($scope, $http){
+  $http({
+    method: 'GET',
+    url: $scope.api, // derived from the rootScope
+    params: {
+      json: 'get_page_index'
+    }
+  }).
+  success(function(data, status, headers, config) {
+    $scope.page = data.pages;
+  });
+
+  $scope.show = false;
+  $scope.toggle = function () {
+    $scope.show = !$scope.show;
+  };
+
+}])
+
+// add a controller categoriesController
+myapp.controller("categoriesController", ['$scope', '$http', function($scope, $http){
+  $http({
+    method: 'GET',
+    url: $scope.api, // derived from the rootScope
+    params: {
+      json: 'get_category_index'
+    }
+  }).
+  success(function(data, status, headers, config) {
+    $scope.categories = data.categories;
+  });
+
+}])
