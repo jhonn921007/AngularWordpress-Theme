@@ -53,6 +53,27 @@ myapp.directive("categories", function(){
   };
 });
 
+myapp.directive("commentsPages", function(){
+  return {
+    restrict: "E",
+    templateUrl: "templates/partials/comments-pages.html"
+  };
+});
+
+myapp.directive("pages", function(){
+  return {
+    restrict: "E",
+    templateUrl: "templates/partials/pages.html"
+  };
+});
+
+myapp.directive("navbar", function(){
+  return {
+    restrict: "E",
+    templateUrl: "templates/partials/navbar.html"
+  };
+});
+
 // add a controller indexController
 myapp.controller('indexController', ['$scope', '$http', function($scope, $http) {
   // load posts from the WordPress API

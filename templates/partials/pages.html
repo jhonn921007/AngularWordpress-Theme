@@ -1,0 +1,9 @@
+<div class="container" ng-repeat="pages in page">
+  <div class="blog-header" >
+    <h1 class="blog-title">{{pages.title}}</h1>
+    <p class="lead blog-description"></p>
+  </div>
+  <div ng-bind-html="pages.content">
+  </div>
+  <comments-pages></comments-pages>
+</div>
