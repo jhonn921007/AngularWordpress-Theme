@@ -1,0 +1,6 @@
+<div class="sidebar-module">
+  <h4>Categorias</h4>
+  <ol class="list-unstyled">
+    <li ng-repeat="categorie in categories"><a href="#/{{categorie.slug}}">{{categorie.title}} </a> <span class="badge">{{categorie.post_count}}</span></li>
+  </ol>
+</div>

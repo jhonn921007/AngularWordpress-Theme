@@ -1,0 +1,4 @@
+<h2 class="blog-post-title">{{post.title}}</h2>
+<p class="blog-post-meta"><span class="glyphicon glyphicon-time" aria-hidden="true"></span> {{post.date}} | <a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{post.author.name}}</a> | <button class="btn btn-default btn-sm" ng-click="toggle()">{{post.comments.length}} <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> comentarios</button></p>
+<div ng-bind-html="post.content">
+</div>
