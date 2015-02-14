@@ -6,6 +6,11 @@
     </div>
     <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
         <categories ng-controller="categoriesController"></categories>
+        <div ng-controller="sideBarController as sidebar">
+          <div ng-bind-html="">
+            {{sidebar.widget}}
+          </div>
+        </div>
     </div>
 
   </div>
